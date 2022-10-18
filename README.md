@@ -2,7 +2,7 @@
 
 ## Plugin information
 
-This plugin has been tested on WooCommerce 6.5 to 7.0 and WordPress 5.9 to 6.0.2.
+This plugin has been tested from WooCommerce 6.5 to 7.0 and WordPress from 5.9 to 6.0.3.
 
 The composer.json have the dependencies of the plugin.
 
@@ -13,9 +13,11 @@ The composer.json have the dependencies of the plugin.
 To install the plugin:
 
 - Go to `Plugins`.
-- Click on `Deactivate` under `WooCommerce UnDosTres Gateway`.
-- Click on `Delete` under `WooCommerce UnDosTres Gateway`.
-- Accept the alert.
+- Click on `Add new` at the top of the page.
+- Click on `Upload plugin` at the top of the page.
+- Upload a plugin.
+- Click on `Install now` at the side of uploader.
+- Click on `Activate plugin`.
 
 ---
 
