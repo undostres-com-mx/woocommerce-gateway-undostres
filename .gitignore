@@ -1,0 +1,8 @@
+#CPO LOCK FILE
+composer.lock
+
+#CPO
+/vendor
+
+#PHPSTORM
+.idea
