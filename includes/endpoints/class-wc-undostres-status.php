@@ -35,9 +35,9 @@ class WC_REST_UDT_STATUS_CONTROLLER extends WP_REST_Controller
         try {
             $order_id = $data->get_param('orderId');
             $order = $this->gateway->get_order($order_id);
-            if (!$this->gateway->are_valid_headers($data)) throw new Exception('Autenticación erronea.');
+            if (!$this->gateway->are_valid_headers($data)) throw new Exception('Autenticación errónea.');
             if ($order_id === null) throw new Exception('Datos recibidos incorrectos.');
-            $this->gateway->log(sprintf("%s -> Se consulto status de la orden: %s", __METHOD__, $order_id));
+            $this->gateway->log(sprintf("%s -> Se consultó status de la orden: %s", __METHOD__, $order_id));
             if ($order === null) $response = ['code' => 404, 'message' => 'Orden no encontrada.'];
             else if (!$this->gateway->is_udt_order($order)) $response = ['code' => 500, 'message' => 'Orden no creada por UnDosTres.'];
             else $response = ['code' => 200, 'message' => 'Ok.', 'status' => $order->get_status()];

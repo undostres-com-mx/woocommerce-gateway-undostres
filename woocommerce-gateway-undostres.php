@@ -131,13 +131,13 @@ function woocommerce_undostres_init()
     }
     if (version_compare(WC_VERSION, WC_UDT_MIN_WC_VER, '<')) {
         add_action('admin_notices', function () {
-            show_udt_alert('UnDosTres necesita minimo la version ' . WC_UDT_MIN_WC_VER . ' de WooCommerce.', WC_UDT_TMessage::Error);
+            show_udt_alert('UnDosTres necesita mínimo la versión ' . WC_UDT_MIN_WC_VER . ' de WooCommerce.', WC_UDT_TMessage::Error);
         });
         return;
     }
     if (get_woocommerce_currency() !== 'MXN') {
         add_action('admin_notices', function () {
-            show_udt_alert('UnDosTres solo funciona si la tienda esta configurada en MXN.', WC_UDT_TMessage::Error);
+            show_udt_alert('UnDosTres solo funciona si la tienda está configurada en MXN.', WC_UDT_TMessage::Error);
         });
         return;
     }
