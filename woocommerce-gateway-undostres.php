@@ -59,6 +59,11 @@ function woocommerce_gateway_undostres()
             {
             }
 
+            /** OVERRIDE WAKEUP METHOD TO PREVENT SERIALIZE **/
+            public function __sleep()
+            {
+            }
+
             /** CONSTRUCTOR PROTECTION TO PREVENT CREATING INSTANCE OF THIS CLASS OUTSIDE THE CLASS **/
             public function __construct()
             {

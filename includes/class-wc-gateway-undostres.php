@@ -24,7 +24,7 @@ class UnDosTres extends WC_Payment_Gateway
         $this->supports = ['products', 'refunds', 'add_payment_method'];
         $this->icon = WC_UDT_PLUGIN_URL . '/assets/images/icon.png';
         /** INITS **/
-        self::init_form_fields();
+        $this->init_form_fields();
         $this->init_settings();
         /** COMMUNICATION URLS AND UTILITY **/
         $this->response_url = add_query_arg(['rest_route' => '/udt/callback'], WC_UDT_SITE_URL);
@@ -130,9 +130,9 @@ class UnDosTres extends WC_Payment_Gateway
      */
     public function process_order($order_id, $status): array
     {
-        $order = self::get_order($order_id);
+        $order = $this->get_order($order_id);
         if ($order === null) return ['code' => 404, 'message' => 'Orden no encontrada.'];
-        if (!self::is_udt_order($order)) return ['code' => 500, 'message' => 'Orden no creada por UnDosTres.'];
+        if (!$this->is_udt_order($order)) return ['code' => 500, 'message' => 'Orden no creada por UnDosTres.'];
         if ($order->get_status() !== 'pending') return ['code' => 500, 'message' => 'Estado previo inválido.'];
         switch ($status) {
             case 'approved':
@@ -165,8 +165,8 @@ class UnDosTres extends WC_Payment_Gateway
      */
     public function get_redirect_url($orderId)
     {
-        $order = self::get_order($orderId);
-        if ($order !== null && self::is_udt_order($order)) {
+        $order = $this->get_order($orderId);
+        if ($order !== null && $this->is_udt_order($order)) {
             if ($order->get_status() === 'processing') return apply_filters('woocommerce_get_return_url', $order->get_checkout_order_received_url(), $order);
             else if ($order->get_status() === 'cancelled') return $order->get_cancel_order_url();
         }
@@ -194,7 +194,7 @@ class UnDosTres extends WC_Payment_Gateway
      */
     public function udt_order_redirect($order_id)
     {
-        $order = self::get_order($order_id);
+        $order = $this->get_order($order_id);
         $request = [
             'currency' => $order->get_currency(),
             'callbackUrl' => $this->response_url,
@@ -225,7 +225,7 @@ class UnDosTres extends WC_Payment_Gateway
             ]
         ];
         $response = SASDK::createPayment($request);
-        self::log(sprintf("%s -> Payment url request send: %s \nReceive:\n%s", __METHOD__, json_encode($request), json_encode($response)));
+        $this->log(sprintf("%s -> Payment url request send: %s \nReceive:\n%s", __METHOD__, json_encode($request), json_encode($response)));
         if ($response["code"] !== 200) {
             $order->update_meta_data('_udt_system_cancel', true);
             $order->update_status("cancelled");
@@ -274,7 +274,7 @@ class UnDosTres extends WC_Payment_Gateway
      */
     public function order_status_changed($order_id, $old_status, $new_status)
     {
-        $order = self::get_order($order_id);
+        $order = $this->get_order($order_id);
         if ($new_status === 'cancelled' && !$order->get_meta('_udt_user_cancel') && !$order->get_meta('_udt_system_cancel') && $order->get_payment_method() === WC_UDT_PAYMENT_ID) {
             if ($old_status !== 'pending' && $old_status !== 'processing') {
                 $order->update_status($old_status, 'Solo se pueden cancelar órdenes pendientes con UnDosTres.');
@@ -282,10 +282,10 @@ class UnDosTres extends WC_Payment_Gateway
                 return;
             }
             $response = SASDK::cancelOrder((string)$order_id);
-            self::log(sprintf("%s -> Admin order cancel, order: %s, received: %s", __METHOD__, $order_id, json_encode($response)));
+            $this->log(sprintf("%s -> Admin order cancel, order: %s, received: %s", __METHOD__, $order_id, json_encode($response)));
             if ($response["code"] !== 200)
                 $order->update_status($old_status, 'Error al procesar con UnDosTres, se regresó al status anterior.');
-            if ($old_status === 'processing')
+            else if ($old_status === 'processing')
                 $order->update_status('refunded', 'Cancelar órdenes pagadas crea un reembolso automático.');
         }
     }
@@ -295,10 +295,10 @@ class UnDosTres extends WC_Payment_Gateway
      */
     public function process_refund($order_id, $amount = null, $reason = ''): bool
     {
-        $order = self::get_order($order_id);
+        $order = $this->get_order($order_id);
         if ($order->get_payment_method() === WC_UDT_PAYMENT_ID) {
             $response = SASDK::refundOrder((string)$order_id, (string)$order_id, $amount);
-            self::log(sprintf("%s -> Refund request, order: %s, amount: %s, received: %s", __METHOD__, $order_id, $amount, json_encode($response)));
+            $this->log(sprintf("%s -> Refund request, order: %s, amount: %s, received: %s", __METHOD__, $order_id, $amount, json_encode($response)));
             if ($response["code"] !== 200)
                 $order->add_order_note('El reembolso no se ha podido procesar: ' . $response["status"]);
             return $response["code"] === 200;
