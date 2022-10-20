@@ -4,7 +4,7 @@
 
 This plugin has been tested from WooCommerce 6.5 to 7.0 and WordPress from 5.9 to 6.0.3.
 
-The composer.json have the dependencies of the plugin.
+The plugin's dependencies are declared in the composer.json file.
 
 ---
 
@@ -15,8 +15,8 @@ To install the plugin:
 - Go to `Plugins`.
 - Click on `Add new` at the top of the page.
 - Click on `Upload plugin` at the top of the page.
-- Upload a plugin.
-- Click on `Install now` at the side of uploader.
+- Upload the plugin.
+- Click on `Install now` at the side of the uploader.
 - Click on `Activate plugin`.
 
 ---
@@ -40,7 +40,7 @@ To uninstall the plugin:
 
 ## Configuration
 
-To configure the plugin do as following:
+To configure the plugin do the following:
 
 - Go to `Plugins`.
 - Click on `Settings` under `WooCommerce UnDosTres Gateway`.
@@ -50,27 +50,27 @@ To configure the plugin do as following:
 
 ## Logs
 
-The logging system logs into a file, WooCommerce let you can see the logs on:
+The logging system writes to a file at $WORDPRESS_ROOT/wp-content/uploads/wc-logs. The file's name follows the format:
 
-Go to `WooCommerce > Status > Logs`.
+`UnDosTres-YYYY-MM-DD-\[random-string\]`
 
-There you will find all the UnDosTres logs.
+WooCommerce also lets you see the logs in the admin panel, by going to `WooCommerce > Status > Logs`.
 
 ---
 
 ## Debugging with VsCode
 
-The file (*launch.json*) already have the configuration to debug.
+The debugging configuration can be found in the *launch.json* file.
 
 ### Server
 
-- It's needed to configure xdebug (*php-fpm*) to use 9009 port.
+- launch.json specifies port 9009 for debugging with Xdebug (*php-fpm*).
 
-- It's needed to do ssh tunneling:
-    - Activate ssh gateway support, edit the following on file `/etc/ssh/sshd_config` set `GatewayPorts yes`.
-    - Restart ssh doing: `sudo service sshd restart`
+- Activate ssh tunneling:
+    - On the server, set `GatewayPorts yes` in the sshd configuration file (`/etc/ssh/sshd_config`).
+    - Restart the ssh server: `sudo service sshd restart` or `sudo systemctl restart sshd`
 
-- It's needed to increase nginx response time:
+- Increase nginx response time by adding the following lines to your site's section in the `sites-enabled` configuration file:
 
 ```
 proxy_connect_timeout       600;
@@ -81,18 +81,18 @@ send_timeout                600;
 
 ### Local
 
-To start de the debug its needed the following extensions on the local machine:
+Install the following extensions in the local machine:
 
-- PHP Debug, on VsCode.
-- Xdebug helper, on web browser.
+- PHP Debug, in VsCode.
+- Xdebug helper, in the web browser.
 
 Do ssh tunneling:
 
 ```
-ssh -i key.pem user@0.0.0.0 -N -R 9009:localhost:9009 -v
+ssh user@server -N -R 9009:localhost:9009 -v
 ```
 
-On the page click on the extension icon and select debug option.
+Click on the extension icon in the browser and select the debug option.
 
 ---
 
