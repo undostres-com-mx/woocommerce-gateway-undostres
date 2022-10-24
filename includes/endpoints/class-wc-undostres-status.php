@@ -43,6 +43,7 @@ class WC_REST_UDT_STATUS_CONTROLLER extends WP_REST_Controller
             else $response = ['code' => 200, 'message' => 'Ok.', 'status' => $order->get_status()];
             return new WP_REST_Response($response);
         } catch (Exception $e) {
+            $this->gateway->log(sprintf("%s -> Excepción: %s", __METHOD__, $e->getMessage()));
             return new WP_REST_Response(['code' => 500, 'message' => $e->getMessage()]);
         }
     }
