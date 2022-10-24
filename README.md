@@ -83,8 +83,8 @@ send_timeout                600;
 
 Install the following extensions in the local machine:
 
-- PHP Debug, in VsCode.
-- Xdebug helper, in the web browser.
+- PHP Debug, on VsCode.
+- Xdebug helper, on web browser.
 
 Do ssh tunneling:
 
@@ -102,6 +102,4 @@ https://github.com/undostres-com-mx/woocommerce-gateway-undostres
 
 ---
 
-## License
-
-This is proprietary software of UnDosTres.
+## License - LGPL 3.0
