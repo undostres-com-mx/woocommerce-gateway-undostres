@@ -1,5 +1,6 @@
 {
-    "require": {
-        "undostres-com-mx/superapp_sdk": "V1.0.2"
-    }
+  "require": {
+    "undostres-com-mx/superapp_sdk": "V1.0.2",
+    "ext-json": "*"
+  }
 }

@@ -13,12 +13,12 @@ abstract class WC_UDT_TMessage
 }
 
 /** NOTIFICATION FOR ADMIN PANEL **/
-function show_udt_alert(string $msg, int $type, bool $isDismissible = false)
+function show_udt_alert(string $msg, int $type, bool $isDismissible = false): void
 {
     $class = '';
     if ($type === WC_UDT_TMessage::Success) $class = 'notice notice-success';
     else if ($type === WC_UDT_TMessage::Info) $class = 'notice notice-info';
     else if ($type === WC_UDT_TMessage::Warning) $class = 'notice notice-warning';
     else if ($type === WC_UDT_TMessage::Error) $class = 'notice notice-error';
-    echo '<div class="' . $class . ($isDismissible ? ' is-dismissible' : '') . '"><p><strong>' . $msg . '</strong></p></div>';
+    echo '<div class="' . esc_attr($class) . ($isDismissible ? esc_attr(' is-dismissible') : '') . '"><p><strong>' . esc_html($msg) . '</strong></p></div>';
 }

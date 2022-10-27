@@ -94,9 +94,9 @@ class UnDosTres extends WC_Payment_Gateway
      *
      * Check if system can log based on user preferences.
      */
-    public function log($message, bool $encode = false)
+    public function log($message)
     {
-        if ($this->get_option('logging') === 'yes') WC_UDT_LOGGER::log($message, $encode);
+        if ($this->get_option('logging') === 'yes') WC_UDT_LOGGER::log($message);
     }
 
     /**
