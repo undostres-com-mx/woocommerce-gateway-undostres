@@ -35,6 +35,7 @@ class UnDosTres extends WC_Payment_Gateway
             /** HOOKS **/
             add_filter('woocommerce_available_payment_gateways', [$this, 'handle_gateways']);
             add_action('woocommerce_receipt_' . $this->id, [$this, 'udt_order_redirect']);
+            add_action('woocommerce_update_options_payment_gateways_' . $this->id, [$this, 'process_admin_options']);
             add_action('woocommerce_order_status_changed', [$this, 'order_status_changed'], 1, 3);
         }
     }
