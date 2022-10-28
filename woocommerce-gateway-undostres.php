@@ -2,10 +2,10 @@
 
 /**
  * Plugin Name: Gateway UnDosTres
- * Plugin URI: https://undostres.com.mx/
+ * Plugin URI: https://github.com/undostres-com-mx/woocommerce-gateway-undostres
  * Description: Receive payments using UnDosTres payments provider.
  * Author: UnDosTres
- * Author URI: https://github.com/undostres-com-mx/woocommerce-gateway-undostres
+ * Author URI: https://undostres.com.mx/
  * Version: 1.0.0
  * Requires at least: 6.0.0
  * Tested up to: 6.0.3
