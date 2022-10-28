@@ -18,7 +18,7 @@
 if (!defined('ABSPATH')) exit;
 
 /** MISCELLANEOUS **/
-const WC_UDT_VER = '1.0.0';
+const WC_UDT_VER = '1.0.1';
 const WC_UDT_MIN_WC_VER = '6.5';
 const WC_UDT_PAYMENT_ID = 'UnDosTres';
 define('WC_UDT_PLUGIN_URL', untrailingslashit(plugins_url(basename(plugin_dir_path(__FILE__)), basename(__FILE__))));
