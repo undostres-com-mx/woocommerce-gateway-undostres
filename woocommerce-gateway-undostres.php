@@ -6,7 +6,7 @@
  * Description: Receive payments using UnDosTres payments provider.
  * Author: UnDosTres
  * Author URI: https://undostres.com.mx/
- * Version: 1.0.0
+ * Version: 1.0.1
  * Requires at least: 6.0.0
  * Tested up to: 6.0.3
  * WC requires at least: 6.5.0
