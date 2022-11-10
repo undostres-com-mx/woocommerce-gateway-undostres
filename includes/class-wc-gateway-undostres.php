@@ -27,8 +27,8 @@ class UnDosTres extends WC_Payment_Gateway
         $this->init_form_fields();
         $this->init_settings();
         /** COMMUNICATION URLS AND UTILITY **/
-        $this->response_url = add_query_arg(['rest_route' => '/udt/callback'], WC_UDT_SITE_URL);
-        $this->return_url = add_query_arg(['rest_route' => '/udt/redirect'], WC_UDT_SITE_URL);
+        $this->response_url = add_query_arg(['rest_route' => '/udt/callback'], WC_UDT_SITE_URL + '/');
+        $this->return_url = add_query_arg(['rest_route' => '/udt/redirect'], WC_UDT_SITE_URL + '/');
         if (!SASDK::$isSet) {
             /** SDK **/
             SASDK::init($this->get_option('key') ?? '', $this->get_option('url') === '' ? null : $this->get_option('url'));
