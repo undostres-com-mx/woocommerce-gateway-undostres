@@ -1,10 +1,25 @@
+/* COMMON ADS */
 kueskipay-widget,
 .nonoplazo_wsppc_div_block,
 aplazo-placement,
 #higslide-div-atrato-info,
 .woocommerce-checkout-review-order-table~table,
-.zip-widget__wrapper,
+.zip-widget__wrapper
+{
+    display: none !important;
+}
+
+/* CITRIC ADS */
 #media_image-4
 {
     display: none !important;
+}
+
+/* PRIXZ ICON FIX */
+.payment_method_UnDosTres span.payment_method_icons {
+    background: none !important;
+}
+
+.payment_method_UnDosTres .payment_method_icons img {
+    display: block !important;
 }

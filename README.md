@@ -2,9 +2,9 @@
 
 ## Plugin information
 
-This plugin has been tested from WooCommerce 6.5 to 7.0 and WordPress from 5.9 to 6.0.3.
-
 The plugin's dependencies are declared in the composer.json file.
+
+Make payment through UnDosTres redirection gateway.
 
 ---
 

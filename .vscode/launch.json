@@ -7,7 +7,7 @@
             "request": "launch",
             "port": 9009,
             "pathMappings": {
-                "/var/www/html/wordpress/wp-content/plugins/woocommerce-gateway-undostres/": "${workspaceFolder}"
+                "/var/www/html/wordpress/wp-content/plugins/gateway-undostres/": "${workspaceFolder}"
             }
         }
     ]

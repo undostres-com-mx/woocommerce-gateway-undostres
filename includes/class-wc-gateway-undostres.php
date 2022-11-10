@@ -31,7 +31,7 @@ class UnDosTres extends WC_Payment_Gateway
         $this->return_url = add_query_arg(['rest_route' => '/udt/redirect'], WC_UDT_SITE_URL);
         if (!SASDK::$isSet) {
             /** SDK **/
-            SASDK::init($this->get_option('key'), $this->get_option('url') === '' ? null : $this->get_option('url'));
+            SASDK::init($this->get_option('key') ?? '', $this->get_option('url') === '' ? null : $this->get_option('url'));
             /** HOOKS **/
             add_filter('woocommerce_available_payment_gateways', [$this, 'handle_gateways']);
             add_action('woocommerce_receipt_' . $this->id, [$this, 'udt_order_redirect']);
@@ -148,7 +148,7 @@ class UnDosTres extends WC_Payment_Gateway
                 $response = ['code' => 200, 'message' => 'Orden cancelada correctamente.'];
                 break;
             default:
-                $response = ['code' => 500, 'message' => 'Nuevo estado incorrecto.',];
+                $response = ['code' => 500, 'message' => 'Nuevo estado incorrecto.'];
                 break;
         }
         $response['paymentId'] = (string)$order_id;
