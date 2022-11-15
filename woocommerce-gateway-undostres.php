@@ -6,7 +6,7 @@
  * Description: Receive payments using UnDosTres payments provider.
  * Author: UnDosTres
  * Author URI: https://undostres.com.mx/
- * Version: 1.0.2
+ * Version: 1.0.3
  * Requires at least: 5.9
  * Tested up to: 6.1
  * WC requires at least: 5.2.2
@@ -18,7 +18,7 @@
 if (!defined('ABSPATH')) exit;
 
 /** MISCELLANEOUS **/
-const WC_UDT_VER = '1.0.2';
+const WC_UDT_VER = '1.0.3';
 const WC_UDT_MIN_WC_VER = '5.2';
 const WC_UDT_PAYMENT_ID = 'UnDosTres';
 define('WC_UDT_PLUGIN_URL', untrailingslashit(plugins_url(basename(plugin_dir_path(__FILE__)), basename(__FILE__))));

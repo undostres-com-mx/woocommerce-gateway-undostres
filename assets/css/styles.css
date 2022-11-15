@@ -23,3 +23,8 @@ aplazo-placement,
 .payment_method_UnDosTres .payment_method_icons img {
     display: block !important;
 }
+
+/* FINVERO ADS */
+.woocommerce-variation-add-to-cart > div:not([class]){
+    display: none !important;
+}
