@@ -37,6 +37,7 @@ class UnDosTres extends WC_Payment_Gateway
             add_action('woocommerce_receipt_' . $this->id, [$this, 'udt_order_redirect']);
             add_action('woocommerce_update_options_payment_gateways_' . $this->id, [$this, 'process_admin_options']);
             add_action('woocommerce_order_status_changed', [$this, 'order_status_changed'], 1, 3);
+            add_filter('woocommerce_checkout_get_value', [$this, 'override_checkout_fields'], 10, 2);
         }
     }
 
@@ -305,5 +306,44 @@ class UnDosTres extends WC_Payment_Gateway
             return $response["code"] === 200;
         }
         return false;
+    }
+
+    /**
+     * GET COOKIE USER DATA AND SET IT ON FIELDS
+     */
+    public function override_checkout_fields($value, $input)
+    {
+        try {
+            $userData = (!empty($_COOKIE["UDTUSER"])) ? SASDK::decryptUDT($_COOKIE["UDTUSER"], null) : null;
+            if ($userData !== null) {
+                $checkout_fields = array(
+                    'billing_first_name' => $userData->userName,
+                    'billing_last_name' => '',
+                    'billing_country' => isset($userData->address) ? $userData->address->country : "",
+                    'billing_address_1' => isset($userData->address) ? ($userData->address->colony . ' ' . $userData->address->street . ' ' . $userData->address->number) : "",
+                    'billing_address_2' => isset($userData->address) ? $userData->address->complement : "",
+                    'billing_city' => isset($userData->address) ? $userData->address->city : "",
+                    'billing_state' => isset($userData->address) ? $userData->address->state : "",
+                    'billing_postcode' => isset($userData->address) ? $userData->address->postalCode : "",
+                    'billing_phone' => $userData->userMobile,
+                    'billing_email' => $userData->userEmail,
+                    'shipping_first_name' => $userData->userName,
+                    'shipping_last_name' => '',
+                    'shipping_country' => isset($userData->address) ? $userData->address->country : "",
+                    'shipping_address_1' => isset($userData->address) ? ($userData->address->colony . ' ' . $userData->address->street . ' ' . $userData->address->number) : "",
+                    'shipping_address_2' => isset($userData->address) ? $userData->address->complement : "",
+                    'shipping_city' => isset($userData->address) ? $userData->address->city : "",
+                    'shipping_state' => isset($userData->address) ? $userData->address->state : "",
+                    'shipping_postcode' => isset($userData->address) ? $userData->address->postalCode : "",
+                );
+                foreach ($checkout_fields as $key_field => $field_value)
+                    if ($input == $key_field && !empty($field_value))
+                        $value = $field_value;
+            }
+            return $value;
+        } catch (Exception $e) {
+            $this->log(sprintf("%s -> Error al autocompletar datos: %s", __METHOD__, $e->getMessage()));
+            return $value;
+        }
     }
 }

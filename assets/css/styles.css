@@ -3,15 +3,14 @@ kueskipay-widget,
 .nonoplazo_wsppc_div_block,
 aplazo-placement,
 #higslide-div-atrato-info,
-.woocommerce-checkout-review-order-table~table,
-.zip-widget__wrapper
-{
+.woocommerce-checkout-review-order-table ~ table,
+.zip-widget__wrapper,
+#fv-p-container {
     display: none !important;
 }
 
 /* CITRIC ADS */
-#media_image-4
-{
+#media_image-4 {
     display: none !important;
 }
 
@@ -25,6 +24,6 @@ aplazo-placement,
 }
 
 /* FINVERO ADS */
-.woocommerce-variation-add-to-cart > div:not([class]){
+.woocommerce-variation-add-to-cart > div:not([class]) {
     display: none !important;
 }
